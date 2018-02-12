@@ -6,7 +6,10 @@ class SurveyForm extends Component{
     renderFields(){
         return (
             <div>
-                <Field type="text" name="title" component={SurveyField} />
+                <Field label="Survey Title" type="text" name="title" component={SurveyField} />
+                <Field label="Subject Line" type="text" name="subject" component={SurveyField} />
+                <Field label="Email Body" type="text" name="body" component={SurveyField} />
+                <Field label="Recipient List" type="text" name="emails" component={SurveyField} />
 
             </div>
         );
@@ -26,6 +29,17 @@ class SurveyForm extends Component{
     }
 }
 
+
+function validate(values){
+        const errors={};
+        if(!values.title){
+            errors.title="Please provide Title";
+        }
+
+        return errors;
+}
+
 export default reduxForm({
+    validate,
     form:"surveyForm"
 })(SurveyForm);
