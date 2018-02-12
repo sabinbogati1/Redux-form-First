@@ -17,27 +17,9 @@ const FIELDS = [
 class SurveyForm extends Component {
   renderFields() {
 
-    return _.map(FIELDS, ({ label, name }) => // <-------|
-      // return _.map(FIELDS, field=>{ // we replace ---|
-
-      // /   return <Field component={SurveyField} type="text" label={field.label} name={field.name} />
-      (
+    return _.map(FIELDS, ({ label, name }) =>(
         <Field key={name} component={SurveyField} type="text" label={label} name={name} />
-      ),
-      //  return (
-      // <div>
-      //     <Field label="Survey Title" type="text" name="title" component={SurveyField} />
-      //     <Field label="Subject Line" type="text" name="subject" component={SurveyField} />
-      //     <Field label="Email Body" type="text" name="body" component={SurveyField} />
-      //     <Field label="Recipient List" type="text" name="emails" component={SurveyField} />
-
-      // </div>
-
-
-      //     })
-
-
-      // );
+      )
     )
     ;
   }
@@ -47,7 +29,7 @@ class SurveyForm extends Component {
       <div>
                 SurveyForm!
 
-        <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+        <form onSubmit={this.props.handleSubmit(this.props.onSurveySubmit)}>
           {this.renderFields()}
           <button type="submit">SUBMIT </button>
         </form>
@@ -59,17 +41,6 @@ class SurveyForm extends Component {
 
 function validate(values) {
   const errors = {};
-//   if (!values.title) {
-//     errors.title = 'Please provide Title';
-//   }
-
-//   if (!values.subject) {
-//     errors.title = 'Please provide subject';
-//   }
-
-//   if (!values.body) {
-//     errors.title = 'Please provide body';
-//   }
 
 errors.emails = validateEmails(values.emails || "");
 
