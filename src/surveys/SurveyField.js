@@ -9,8 +9,9 @@ export default ({input , label, meta:{error,touched}  }) =>{
          <div>
              <label>{label} </label>
                <input {...input}  />
-               {touched && error}
-
+               <div>
+                    {touched && error}
+                </div>
 
         </div>
     )
