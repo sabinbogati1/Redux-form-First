@@ -1,68 +1,71 @@
-import React,{Component} from "react";
-import {reduxForm, Field} from "redux-form";
-import SurveyField from "./SurveyField";
-import _ from "lodash";
+import _ from 'lodash';
+import React, { Component } from 'react';
+import { reduxForm, Field } from 'redux-form';
+import SurveyField from './SurveyField';
 
 
-const FIELDS=[
 
-    {label : "Survey Title", name:"title"},
-    {label:"Subject Line", name:"subject" },
-    {label:"Email Body", name:"body" },
-    {label:"Recipient List", name:"emails"}
+const FIELDS = [
+
+  { label: 'Survey Title', name: 'title' },
+  { label: 'Subject Line', name: 'subject' },
+  { label: 'Email Body', name: 'body' },
+  { label: 'Recipient List', name: 'emails' },
 ];
 
-class SurveyForm extends Component{
-    renderFields(){
+class SurveyForm extends Component {
+  renderFields() {
 
-        return _.map(FIELDS, ({label,name})=>{ //<-------|
-       // return _.map(FIELDS, field=>{ // we replace ---|
+    return _.map(FIELDS, ({ label, name }) => // <-------|
+      // return _.map(FIELDS, field=>{ // we replace ---|
 
-         ///   return <Field component={SurveyField} type="text" label={field.label} name={field.name} />
-         return (
-         <Field key={name} component={SurveyField} type="text" label={label} name={name} />
-                );
+      // /   return <Field component={SurveyField} type="text" label={field.label} name={field.name} />
+      (
+        <Field key={name} component={SurveyField} type="text" label={label} name={name} />
+      ),
       //  return (
-            // <div>
-            //     <Field label="Survey Title" type="text" name="title" component={SurveyField} />
-            //     <Field label="Subject Line" type="text" name="subject" component={SurveyField} />
-            //     <Field label="Email Body" type="text" name="body" component={SurveyField} />
-            //     <Field label="Recipient List" type="text" name="emails" component={SurveyField} />
+      // <div>
+      //     <Field label="Survey Title" type="text" name="title" component={SurveyField} />
+      //     <Field label="Subject Line" type="text" name="subject" component={SurveyField} />
+      //     <Field label="Email Body" type="text" name="body" component={SurveyField} />
+      //     <Field label="Recipient List" type="text" name="emails" component={SurveyField} />
 
-            // </div>
-
-
-       //     })
+      // </div>
 
 
-        //);
-    })}
+      //     })
 
-    render(){
-        return(
-            <div>
+
+      // );
+    )
+    ;
+  }
+
+  render() {
+    return (
+      <div>
                 SurveyForm!
 
-                <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
-                {this.renderFields()}
-               <button type="submit">SUBMIT </button>
-                </form>
-            </div>
-        )
-    }
+        <form onSubmit={this.props.handleSubmit(values => console.log(values))}>
+          {this.renderFields()}
+          <button type="submit">SUBMIT </button>
+        </form>
+      </div>
+    );
+  }
 }
 
 
-function validate(values){
-        const errors={};
-        if(!values.title){
-            errors.title="Please provide Title";
-        }
+function validate(values) {
+  const errors = {};
+  if (!values.title) {
+    errors.title = 'Please provide Title';
+  }
 
-        return errors;
+  return errors;
 }
 
 export default reduxForm({
-    validate,
-    form:"surveyForm"
+  validate,
+  form: 'surveyForm',
 })(SurveyForm);
